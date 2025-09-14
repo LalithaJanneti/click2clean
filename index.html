@@ -17,7 +17,20 @@
       color:#333;
       line-height:1.6;
       border: 5px solid rgb(238, 19, 183);
+      font-size: 16px;    /* ✅ Base font for readability */
+  line-height: 1.5;
     }
+
+@media (max-width: 480px) {  /* ✅ Extra small phones */
+  body {
+    font-size: 14px;  /* ✅ Slightly smaller font */
+  }
+
+  .container {
+    padding: 5px;     /* ✅ Less padding on small screens */
+  }
+}
+
 
      
     /* HEADER */
@@ -115,6 +128,21 @@
     nav{
       margin-top:8px;
     }
+    nav {
+    display: flex;
+    flex-wrap: wrap;          /* ✅ Allow wrapping on small screens */
+    justify-content: space-between;
+    align-items: center;
+   }
+
+/* Mobile view adjustments */
+    @media (max-width: 768px) {          /* ✅ Media query for tablets & phones */
+    .nav {
+      flex-direction: column;          /* ✅ Stack navbar items vertically */
+      text-align: center;
+    }
+  }
+
 
     nav a{
       color:rgb(233, 240, 229);
@@ -272,6 +300,17 @@ footer .social-icons {
   margin: 10px 0;
   padding:0;
 }
+    /* Mobile-specific */
+@media (max-width: 768px) {
+  .footer {
+    font-size: 14px;                 /* ✅ Reduce text size for small screens */
+  }
+
+  .social-icons a {
+    margin: 5px;                     /* ✅ Space out icons better on mobile */
+  }
+}
+
 
 /* individual icon links */
 footer .social-icons a {
