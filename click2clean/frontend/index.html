@@ -16,6 +16,7 @@
       background:#f9f9f9;
       color:#333;
       line-height:1.6;
+      border: 5px solid rgb(238, 19, 183);
     }
 
      
@@ -131,11 +132,14 @@
 
     /* HERO */
     .hero{
-      background:#27ae60;
+      min-height: 250px;
+      background: linear-gradient(-45deg, #27ae60, #2ecc71, #1abc9c, #27ae60);
+      background-size: 400% 400%;
       color:white;
       padding:60px 20px;
       text-align:center;
-      animation:fadeIn 1.5s ease-in-out;
+      animation: gradientBG 2s ease infinite, fadeIn 1.5s ease-in-out;
+      
     }
 
     .hero h2{
@@ -148,6 +152,30 @@
       margin:auto;
       font-size:1.1rem;
     }
+    /* gradient animation keyframes */
+   @keyframes gradientBG {
+    0% {
+    background-position: 0% 50%;
+    }
+    50% {
+    background-position: 100% 50%;
+    }
+    100% {
+    background-position: 0% 50%;
+    }
+   }
+
+    /* existing fade in if needed */
+   @keyframes fadeIn {
+   0% {
+    opacity: 0;
+    transform: translateY(20px);
+   }
+   100% {
+    opacity: 1;
+    transform: translateY(0);
+   }
+   }
 
     /* CONTAINER */
     .container{
@@ -160,21 +188,31 @@
       animation:fadeInUp 1.5s ease-in-out;
     }
 
-    .container h1{
+    .container h1,p{
       text-align:center;
       margin-bottom:10px;
       color:#2c3e50;
     }
+    .container a{
+      text-align: center;
+      color:blue;
+      align-items: center;
+    }
 
     .btn{
-      display:inline-block;
+      align-items: center;
+      display:block;
+      width: fit-content;  
+      margin: 15px auto;  
       background:#27ae60;
       color:white;
       padding:10px 15px;
       text-decoration:none;
       border-radius:5px;
       transition:background 0.3s;
+      font-weight: bold;
       margin-top:15px;
+      text-align: center;
     }
 
     .btn:hover{
@@ -197,6 +235,7 @@
     }
 
     .leaderboard li{
+      border:2px solid black;
       background:#f4f4f4;
       padding:8px;
       margin-bottom:6px;
@@ -208,14 +247,47 @@
       transform:scale(1.03);
     }
 
-    /* SOCIAL FOOTER */
+    /* SOCIAL FOOTER 
     footer{
       text-align:center;
       padding:20px;
       background:#2c3e50;
       color:white;
       margin-top:30px;
-    }
+    }*/
+
+    footer {
+  text-align: center;
+  padding: 20px;
+  background: #e91dce;
+  color: rgb(233, 24, 24);
+  margin-top: 30px;
+}
+
+/* container for the icons */
+footer .social-icons {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  gap: 15px; 
+  margin: 10px 0;
+  padding:0;
+}
+
+/* individual icon links */
+footer .social-icons a {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 24px;       /* bigger icons */
+  color: rgb(71, 233, 39);          /* default colour */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* hover effect */
+footer .social-icons a:hover {
+  color: #27ae60;        /* change to green on hover */
+  transform: scale(1.2); /* slight zoom */
+}
+
 
     .social-icons{
       margin-top:10px;
@@ -252,7 +324,44 @@
       align-items:center;
       color:#555;
       font-size:1rem;
+      border:2px solid #333
     }
+    .cleaning-updates {
+  padding: 20px;
+  background: #f9f9f9;
+}
+.report-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: #fff;
+}
+.before-after {
+  display: flex;
+  gap: 20px;
+}
+.before, .after {
+  flex: 1;
+  text-align: center;
+}
+.before img, .after img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.loading {
+  color: #e91e63;
+  font-weight: bold;
+  margin-top: 80px;
+}
+.quote {
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+}
+
 
     /* Animations */
     @keyframes fadeIn{
@@ -321,20 +430,52 @@
 </header>
 
 <section class="hero">
+  <div>
     <h2>Together for a cleaner city</h2>
     <p>Report waste dumps with location & photos. Track progress. Earn ratings for your contribution.</p>
+    </div>
+    
 </section> 
 
 <div class="container">
-  <h2>Welcome Citizen <span id="citizenID"></span></h2>
-  <p>Report waste dumps, track cleanups and earn ratings!</p>
+  <!--<h2>Welcome Citizen <span id="citizenID"></span></h2>
+  <p>Report waste dumps, track cleanups and earn ratings!</p>-->
 
   <h1>Welcome to Click2Clean</h1>
   <p>Your solution for reporting and tracking local cleaning initiatives.</p>
   <a href="login.html" class="btn">Report an Issue</a>
 
   <!-- Placeholder for an image you will add later -->
-  <div class="image-placeholder">[Your Image Here]</div>
+  <div class="image-placeholder">
+    <img src="image.jpeg">
+  </div>
+
+  <section class="cleaning-updates">
+  <h2>Latest Cleaning Updates</h2>
+
+  <!-- Single report card -->
+  <div class="report-card">
+    <div class="before-after">
+      <!-- Before photo -->
+      <div class="before">
+        <h3>Before</h3>
+        <img src="citizenphoto.jpeg" alt="Reported area before cleaning">
+      </div>
+
+      <!-- After photo OR loading -->
+      <div class="after">
+        <h3>After</h3>
+        <img src="municipality.jpeg" alt="Cleaned area" id="afterPhoto">
+        <div class="loading" id="loadingMsg">Cleaning in progress...</div>
+      </div>
+    </div>
+    <p class="quote">
+      “Thanks for reporting! Our team is working to clean this area.”
+    </p>
+  </div>
+
+ </section>
+
 
   <h2>Leaderboard</h2>
   <div class="leaderboard">
@@ -350,13 +491,42 @@
 <footer>
   <p>Connect with us:</p>
   <div class="social-icons">
-    <a href="#" title="LinkedIn">in</a>
-    <a href="#" title="Instagram">Ig</a>
-    <a href="#" title="Twitter">Tw</a>
-    <a href="#" title="WhatsApp">Wa</a>
+    <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
   </div>
   <p>&copy; 2025 Click2Clean. All rights reserved.</p>
 </footer>
+<script>
+  fetch('/api/reports')
+    .then(res => res.json())
+    .then(reports => {
+      const container = document.getElementById('reportsContainer');
+      reports.forEach(report => {
+        const card = document.createElement('div');
+        card.className = 'report-card';
+        card.innerHTML = `
+          <div class="before-after">
+            <div class="before">
+              <h3>Before</h3>
+              <img src="${report.citizenPhoto}" alt="Before cleaning">
+            </div>
+            <div class="after">
+              <h3>After</h3>
+              ${
+                report.municipalityPhoto
+                  ? `<img src="${report.municipalityPhoto}" alt="After cleaning">`
+                  : `<div class="loading">Cleaning in progress...</div>`
+              }
+            </div>
+          </div>
+          <p class="quote">${report.quote}</p>
+        `;
+        container.appendChild(card);
+      });
+    });
+</script>
 
 <script src="script.js"></script>
 </body>
