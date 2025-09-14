@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipality Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2c3e50;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    header nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      background: white;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .container h2 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #2c3e50;
+      color: white;
+    }
+
+    td button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    td button:hover {
+      background: #219150;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Municipality Dashboard</h1>
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Reported Cases</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Citizen ID</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="muniTable"></tbody>
+  </table>
+</div>
+
+<script>
+  // Load reported cases from localStorage or create mock data
+  const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+
+  // Populate table
+  const muniTable = document.getElementById('muniTable');
+  if (reports.length === 0) {
+    // Example dummy data
+    reports.push({citizenId: 'CIT123', time: '2025-09-13 10:00', location: 'Main Street', status: 'Pending'});
+    reports.push({citizenId: 'CIT456', time: '2025-09-13 11:30', location: 'Market Area', status: 'In Progress'});
+  }
+
+  reports.forEach((rep, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${rep.citizenId || 'N/A'}</td>
+      <td>${rep.time}</td>
+      <td>${rep.location || 'Not specified'}</td>
+      <td>${rep.status}</td>
+      <td><button onclick="updateStatus(${index})">Mark as Solved</button></td>
+    `;
+    muniTable.appendChild(tr);
+  });
+
+  function updateStatus(index) {
+    // Update status locally
+    reports[index].status = 'Solved';
+    localStorage.setItem('reports', JSON.stringify(reports));
+    alert('Status updated to Solved!');
+    location.reload();
+  }
+</script>
+</body>
+</html>
